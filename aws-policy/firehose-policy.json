@@ -1,0 +1,38 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "S3Access",
+			"Effect": "Allow",
+			"Action": [
+                "s3:PutObject", "s3:AbortMultipartUpload", "s3:GetBucketLocation",
+                "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:ListMultipartUploadParts"
+            ],
+			"Resource": [
+                "arn:aws:s3:::jm-demo-s3-lab/*",
+				"arn:aws:s3:::jm-demo-s3-lab"
+            ]
+		},
+		{
+			"Sid": "KinesisManagement",
+			"Effect": "Allow",
+			"Action": [
+				"kinesis:DescribeStream","kinesis:DescribeStreamSummary",
+                "kinesis:GetRecords", "kinesis:GetShardIterator", "kinesis:ListShards",
+				"kinesis:CreateStream", "kinesis:DeleteStream", "kinesis:ListStreams",
+				"kinesis:PutRecord", "kinesis:PutRecords"
+			],
+			"Resource": [
+				"arn:aws:kinesis:us-east-1:890375773941:stream/jm-demo-kinesis-lab"
+			]
+		},
+        {
+            "Sid": "Logs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:PutLogEvents", "logs:CreateLogStream", "logs:CreateLogGroup", "logs:DescribeLogStreams"
+            ],
+            "Resource": "*"
+        }
+	]
+}

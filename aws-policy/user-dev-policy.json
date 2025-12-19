@@ -1,0 +1,62 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "IAMRoleManagement",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:GetRole",
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:DeleteRole"
+            ],
+            "Resource": "arn:aws:iam::890375773941:role/FirehoseToS3Role"
+        },
+        {
+            "Sid": "KinesisAndFirehoseManagement",
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:CreateStream",
+                "kinesis:DescribeStream",
+                "kinesis:DescribeStreamSummary",
+                "kinesis:ListStreams",
+                "kinesis:PutRecord",
+                "kinesis:PutRecords",
+                "kinesis:ListShards",
+                "firehose:CreateDeliveryStream",
+                "firehose:DescribeDeliveryStream",
+                "firehose:ListDeliveryStreams"
+            ],
+            "Resource": [
+                "arn:aws:kinesis:us-east-1:890375773941:stream/jm-demo-kinesis-lab",
+                "arn:aws:firehose:us-east-1:890375773941:deliverystream/salud-firehose-tos3"
+            ]
+        },
+        {
+            "Sid": "S3Management",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation",
+                "s3:CreateBucket",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "*",
+                "arn:aws:s3:::jm-demo-s3-lab"
+            ]
+        },
+        {
+            "Sid": "IAMPassRole",
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::890375773941:role/FirehoseToS3Role",
+            "Condition": {
+                "StringEquals": {
+                    "iam:PassedToService": "firehose.amazonaws.com"
+                }
+            }
+        }
+    ]
+}
