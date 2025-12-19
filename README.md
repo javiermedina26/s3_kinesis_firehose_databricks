@@ -2,6 +2,9 @@
 
 ###### Este proyecto se realizó con fines educativos para entender los servicios e interconexiones entre AWS (Kinesis, S3, IAM) y Databricks. Utiliza un script en Python para simular la creación y envío de datos.
 
+### 0. Archivo obtenido del Kaggle para realizar la carga de un archivo .csv
+* https://www.kaggle.com/datasets/shaistashahid/child-labor-statistics
+    * child_labor_statistics - child_labor_statistics_20251214_123456.csv
 ### 1. Configuración Local ![alt text](image.png)
 * Descarga la herramienta virtualenv y la instala para el usuario actual.
 ```
