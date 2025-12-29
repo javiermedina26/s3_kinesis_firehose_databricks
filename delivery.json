@@ -1,0 +1,21 @@
+{
+    "DeliveryStreamName": "salud-firehose-tos3",
+    "DeliveryStreamType": "KinesisStreamAsSource",
+    "KinesisStreamSourceConfiguration": {
+        "RoleARN": "arn:aws:iam::890375773941:role/FirehoseToS3Role",
+        "KinesisStreamARN": "arn:aws:kinesis:us-east-1:890375773941:stream/jm-demo-kinesis-lab"
+    },
+    "ExtendedS3DestinationConfiguration": {
+        "RoleARN": "arn:aws:iam::890375773941:role/FirehoseToS3Role",
+        "BucketARN": "arn:aws:s3:::jm-demo-s3-lab",
+        "Prefix": "bronze/ingestion_date=!{timestamp:yyyy/MM/dd}",
+        "ErrorOutputPrefix": "bronze_errors/ingestion_date=!{timestamp:yyyy/MM/dd/!{firehose:error-output-type}/",
+        "BufferingHints": { "SizeInMBs": 1, "IntervalInSeconds": 60 },
+        "CompressionFormat": "UNCOMPRESSED",
+        "CloudWatchLoggingOptions": {
+            "Enabled": true,
+            "LogGroupName": "/aws/kinesisfirehose/salud-firehose-to-s3",
+            "LogStreamName": "S3Delivery"
+        }
+    }
+}
