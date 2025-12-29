@@ -23,12 +23,15 @@ def enviar_a_kinesis(dataframe, batch_size=100):
         
         records = []
         for _, row in chunk.iterrows():
+            dict_data = row.to_dict()
             # Usamos json.dumps(row.to_dict()) para un JSON más limpio
-            payload = json.dumps(row.to_dict())
-            records.append({
-                'Data': payload.encode('utf-8'),
-                'PartitionKey': str(uuid.uuid4())
-            })
+            # payload = json.dumps(row.to_dict()) + "\n"
+            payload = (json.dumps(dict_data) + "\n").encode("utf-8")
+            # records.append({
+            #     'Data': payload.encode('utf-8'),
+            #     'PartitionKey': str(uuid.uuid4())
+            # })
+            records.append({"Data": payload, "PartitionKey": str(uuid.uuid4())})
         
         # Enviar el lote
         try:

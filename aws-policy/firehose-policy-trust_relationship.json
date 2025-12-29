@@ -1,0 +1,30 @@
+// Esto es solo una muestra de lo que debe pegarse en el "Trust Relationship" (TR) del role FirehoseToS3Role
+// esto debe obtenerse del databricks y pegarse en la seccion "TR" antes mencionada en IAM de AWS
+// nota no usar este debido a que solo pertenece a mi cuenta y ya se encuentra cadudada
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "firehose.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL",
+                    "arn:aws:iam::890375773941:role/FirehoseToS3Role"
+                ]
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "0b17c071-364e-4247-818b-be97c90a9766"
+                }
+            }
+        }
+    ]
+}
